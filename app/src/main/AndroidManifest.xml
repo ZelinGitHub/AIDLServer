@@ -5,6 +5,7 @@
 
     <permission android:name="com.example.aidlserver.serv.BookService" />
     <permission android:name="com.example.aidlserver.serv.PoolService" />
+    <permission android:name="com.example.aidlserver.serv.MessengerService" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <service
+            android:name=".serv.MessengerService"
+            android:permission="com.example.aidlserver.serv.MessengerService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.aidlserver.serv.MessengerService" />
+            </intent-filter>
+        </service>
         <service
             android:name=".serv.PoolService"
             android:enabled="true"
