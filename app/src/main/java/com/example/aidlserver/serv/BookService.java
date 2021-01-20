@@ -88,6 +88,11 @@ public class BookService extends Service {
                 @Override
                 public void run() {
                     try {
+                        BookDeathRecipient bookDeathRecipient = new BookDeathRecipient(clientBinder.asBinder());
+                        //注册死亡监听，注意这里使用的是Stub，而不是Stub的代理Proxy
+                        System.out.println("服务端 远程注册客户端Binder的死亡监听");
+                        clientBinder.asBinder().linkToDeath(bookDeathRecipient, 0);
+
                         System.out.println("服务端 查询客户端的等级");
                         int level = clientBinder.getLevel();
                         System.out.println("服务端 得到的客户端等级是 " + level);
@@ -119,4 +124,19 @@ public class BookService extends Service {
     }
 
 
+    static class BookDeathRecipient implements IBinder.DeathRecipient {
+        private IBinder mClientBinder;
+
+        public BookDeathRecipient(IBinder pClientBinder) {
+            mClientBinder = pClientBinder;
+        }
+
+        @Override
+        public void binderDied() {
+            System.out.println("服务端 死亡监听回调");
+            System.out.println("服务端 远程注销客户端Binder的死亡监听");
+            //注销死亡监听
+            mClientBinder.unlinkToDeath(this, 0);
+        }
+    }
 }
