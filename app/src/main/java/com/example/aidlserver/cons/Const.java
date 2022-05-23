@@ -16,6 +16,9 @@ public class Const {
     public static final int BINDER_CODE_SECURITY = 0;
     public static final int BINDER_CODE_COMPUTE = 1;
 
-    public static final String KEY_SERVER_MSG="KEY_SERVER_MSG";
-    public static final String KEY_CLIENT_MSG="KEY_CLIENT_MSG";
+    public static final String KEY_SERVER_MSG = "KEY_SERVER_MSG";
+    public static final String KEY_CLIENT_MSG = "KEY_CLIENT_MSG";
+
+
+    public static final String SERVER_BROADCAST_ACTION = "com.example.broadcastreceiver.MyBroadcastReceiver";
 }
